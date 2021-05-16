@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { User } from "../../model/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
@@ -9,7 +10,10 @@ class TurnUserAdminUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ user_id }: IRequest): User {
-    // Complete aqui
+    const id= user_id;
+    const user = this.usersRepository.findById(id);
+    const newUser = this.usersRepository.turnAdmin(user);
+    return newUser;
   }
 }
 

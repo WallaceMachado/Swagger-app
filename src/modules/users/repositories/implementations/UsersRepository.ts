@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { User } from "../../model/User";
 import { IUsersRepository, ICreateUserDTO } from "../IUsersRepository";
 
@@ -19,23 +20,52 @@ class UsersRepository implements IUsersRepository {
   }
 
   create({ name, email }: ICreateUserDTO): User {
-    // Complete aqui
+    const user = new User();
+
+  
+  Object.assign(user, {
+    name,
+    email,
+    admin: false,
+    created_at: new Date(),
+    updated_at: new Date(),
+  });
+
+  this.users.push(user);
+  return user;
   }
 
-  findById(id: string): User | undefined {
-    // Complete aqui
+  findById(id: string): User {
+    const user = this.users.find(user=> user.id === id);
+
+    return user;
   }
 
-  findByEmail(email: string): User | undefined {
-    // Complete aqui
+  findByEmail(id: string): User  {
+    // Complete 
   }
 
   turnAdmin(receivedUser: User): User {
-    // Complete aqui
+    const { id } = receivedUser;
+    
+  
+    const userIndex = this.users.findIndex(user => user.id === id);
+    
+  
+   
+    const user = {
+      ...this.users[userIndex],
+      admin:true,
+      updated_at: new Date(),
+    };
+  
+    this.users[userIndex] = user;
+  
+    return user;
   }
 
   list(): User[] {
-    // Complete aqui
+    return this.users;
   }
 }
 
