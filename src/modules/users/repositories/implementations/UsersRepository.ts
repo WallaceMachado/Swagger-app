@@ -22,6 +22,7 @@ class UsersRepository implements IUsersRepository {
   create({ name, email }: ICreateUserDTO): User {
     const user = new User();
 
+    
   
   Object.assign(user, {
     name,
@@ -41,8 +42,10 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  findByEmail(id: string): User  {
-    // Complete 
+  findByEmail(email: string): User  {
+    const user = this.users.find(user=> user.email === email);
+
+    return user;
   }
 
   turnAdmin(receivedUser: User): User {
